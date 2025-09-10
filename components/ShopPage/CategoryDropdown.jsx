@@ -19,6 +19,7 @@ const categories = [
 export default function CategoryDropdown() {
   return (
     <div className="relative group">
+      {/* Browse Categories button */}
       <button className="flex items-center bg-blue-500 text-white font-semibold h-16 w-64">
         <div className="flex items-center justify-between w-full px-5">
           <Menu className="w-5 h-5" />
@@ -27,13 +28,14 @@ export default function CategoryDropdown() {
         </div>
       </button>
 
+      {/* Dropdown */}
       <div className="absolute left-0 mt-2 hidden group-hover:block w-64 bg-white shadow-lg rounded-md py-2 z-50">
         {categories.map((category) => (
-          <CategoryItem 
-            key={category.name} 
-            name={category.name} 
-            Icon={category.icon} 
-            sub={category.sub} 
+          <CategoryItem
+            key={category.name}
+            name={category.name}
+            Icon={<category.icon className="w-4 h-4" />} // ✅ pass JSX element
+            sub={category.sub}
           />
         ))}
       </div>

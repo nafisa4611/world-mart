@@ -1,34 +1,23 @@
-"use client"
-
-import { ChevronDown } from "lucide-react"
-import { useState } from "react"
 
 
 export default function CategoryItem({ name, Icon, sub }) {
-  const [isHovered, setIsHovered] = useState(false)
-
   return (
-    <div 
-      className="relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <button className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100">
-        <div className="flex items-center gap-2">
-          <Icon className="w-5 h-5 text-gray-700" />
-          <span>{name}</span>
-        </div>
-        <ChevronDown className="w-4 h-4 text-gray-500" />
-      </button>
+    <div className="px-4 py-2 hover:bg-gray-100">
+      {/* Category Name + Icon */}
+      <div className="flex items-center gap-2 font-medium text-gray-700">
+        {Icon} {/* ✅ already an element */}
+        <span>{name}</span>
+      </div>
 
-      {isHovered && (
-        <div className="absolute top-0 left-full ml-1 w-48 bg-white shadow-lg rounded-md py-2 z-50">
-          {sub.map((s) => (
-            <a key={s} href="#" className="block px-4 py-2 hover:bg-gray-100 text-gray-700">
-              {s}
-            </a>
+      {/* Subcategories */}
+      {sub && (
+        <ul className="ml-6 mt-1 space-y-1 text-sm text-gray-600">
+          {sub.map((item) => (
+            <li key={item} className="hover:text-blue-500 cursor-pointer">
+              {item}
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   )

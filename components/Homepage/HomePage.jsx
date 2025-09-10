@@ -7,11 +7,13 @@ import ProductShowcase from "@/components/ProductShowcase";
 import PromoTiles from "@/components/PromoTiles";
 import SecondaryProductZone from "@/components/SecondaryProductZone";
 import TodayHotDeals from "@/components/TodayHotDeals";
+import MainNav from "../HeroSection/MainNav";
 
 
 export default function HomePage() {
   return (
     <div>
+        <MainNav />
         <HeroSection />
         <PromoTiles />
         <ProductShowcase />
