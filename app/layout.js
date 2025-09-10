@@ -1,6 +1,6 @@
 import { Roboto } from "next/font/google";
-import TopbarHeader from "@/components/Topbar-Header/TopbarHeader";
-import Footer from "@/components/Footer";
+import TopbarHeader from "@/components/Homepage/Topbar-Header/TopbarHeader";
+import Footer from "@/components/Homepage/Footer";
 import "./globals.css";
 
 const roboto = Roboto({

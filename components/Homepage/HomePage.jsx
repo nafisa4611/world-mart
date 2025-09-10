@@ -1,13 +1,13 @@
-import CategoryHighlightMosaic from "@/components/CategoryHighlightMosaic";
-import FullWidthBanner from "@/components/FullWidthBanner";
-import HeroSection from "@/components/HeroSection/HeroSection";
-import InnovativeGadgets from "@/components/InnovativeGadgets";
-import PartnersSection from "@/components/PartnerSection";
-import ProductShowcase from "@/components/ProductShowcase";
-import PromoTiles from "@/components/PromoTiles";
-import SecondaryProductZone from "@/components/SecondaryProductZone";
-import TodayHotDeals from "@/components/TodayHotDeals";
-import MainNav from "../HeroSection/MainNav";
+import CategoryHighlightMosaic from "@/components/Homepage/CategoryHighlightMosaic";
+import FullWidthBanner from "@/components/Homepage/FullWidthBanner";
+import HeroSection from "@/components/Homepage/HeroSection/HeroSection";
+import InnovativeGadgets from "@/components/Homepage/InnovativeGadgets";
+import PartnersSection from "@/components/Homepage/PartnerSection";
+import ProductShowcase from "@/components/Homepage/ProductShowcase";
+import PromoTiles from "@/components/Homepage/PromoTiles";
+import SecondaryProductZone from "@/components/Homepage/SecondaryProductZone";
+import TodayHotDeals from "@/components/Homepage/TodayHotDeals";
+import MainNav from "./HeroSection/MainNav";
 
 
 export default function HomePage() {
