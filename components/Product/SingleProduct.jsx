@@ -1,12 +1,12 @@
-import ProductBreadcrumbs from "@/components/product/ProductBreadcrumbs"
-import ProductIntro from "@/components/product/ProductIntro"
-import ProductGallery from "@/components/product/ProductGallery"
-import ProductBuyBox from "@/components/product/ProductBuyBox"
-import ProductTabs from "@/components/product/ProductTabs"
-import ProductFeatures from "@/components/product/ProductFeatures"
-import ProductFrequentlyBought from "@/components/product/ProductFrequentlyBought"
-import ProductUpsell from "@/components/product/ProductUpsell"
-import ProductRelated from "@/components/product/ProductRelated"
+import ProductBreadcrumbs from "@/components/Product/ProductBreadcrumbs"
+import ProductIntro from "@/components/Product/ProductIntro"
+import ProductGallery from "@/components/Product/ProductGallery"
+import ProductBuyBox from "@/components/Product/ProductBuyBox"
+import ProductTabs from "@/components/Product/ProductTabs"
+import ProductFeatures from "@/components/Product/ProductFeatures"
+import ProductFrequentlyBought from "@/components/Product/ProductFrequentlyBought"
+import ProductUpsell from "@/components/Product/ProductUpsell"
+import ProductRelated from "@/components/Product/ProductRelated"
 
 
 export default function SingleProduct() {

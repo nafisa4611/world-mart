@@ -1,4 +1,4 @@
-"use client"
+
 
 import { Shield, RefreshCw, Truck, CreditCard } from "lucide-react"
 
