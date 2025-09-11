@@ -1,11 +1,10 @@
+
 export default function LoginHero({ title, breadcrumbs }) {
   return (
-    <section
-      className="relative bg-black text-white py-20 md:py-28"
+    <section className="relative bg-black text-white py-20 md:py-28"
       style={{
-        backgroundImage: `url('/shop-hero-bg.jpg')`, // can be dynamic
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundImage: `url('/shop-hero-bg.jpg')`,
+        backgroundSize: "cover", backgroundPosition: "center",
       }}
     >
       {/* Overlay for contrast */}
@@ -22,11 +21,10 @@ export default function LoginHero({ title, breadcrumbs }) {
             <span key={idx} className="flex items-center">
               {idx > 0 && <span className="mx-2">›</span>}
               <span
-                className={`${
-                  idx === breadcrumbs.length - 1
-                    ? "text-white font-semibold"
-                    : "hover:text-gray-100"
-                }`}
+                className={`${idx === breadcrumbs.length - 1
+                  ? "text-white font-semibold"
+                  : "hover:text-gray-100"
+                  }`}
               >
                 {crumb}
               </span>

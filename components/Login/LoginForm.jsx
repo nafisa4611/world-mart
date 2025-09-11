@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
+import { FaFacebookF, FaGoogle } from "react-icons/fa"
 
 export default function LoginForm() {
   const [error, setError] = useState("")
@@ -16,39 +17,77 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="p-6 border rounded-lg shadow-sm">
-      <h2 className="text-xl font-semibold mb-4">Login</h2>
-      {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-w-md mx-auto p-8 bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+      <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">Welcome Back</h2>
+      <p className="text-sm text-gray-500 mb-6 text-center">
+        Log in to continue shopping and manage your account.
+      </p>
+
+      {error && (
+        <p className="text-red-500 text-sm mb-3 text-center bg-red-50 p-2 rounded-md">
+          {error}
+        </p>
+      )}
+
+      {/* Form */}
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="text-sm">Username or email address *</label>
-          <Input required />
+          <Input
+            placeholder="Username or email address *"
+            required
+            className="rounded-lg focus:ring-2 focus:ring-blue-500"
+          />
         </div>
         <div>
-          <label className="text-sm">Password *</label>
-          <Input type="password" required />
+          <Input
+            type="password"
+            placeholder="Password *"
+            required
+            className="rounded-lg focus:ring-2 focus:ring-blue-500"
+          />
         </div>
-        <div className="flex items-center justify-between">
+
+        {/* Remember + Forgot */}
+        <div className="flex items-center justify-between text-sm">
           <div className="flex items-center space-x-2">
             <Checkbox id="remember" />
-            <label htmlFor="remember" className="text-sm">
-              Remember me
-            </label>
+            <label htmlFor="remember" className="text-gray-600">Remember me</label>
           </div>
-          <a href="#" className="text-sm underline">Lost your password?</a>
+          <a href="#" className="text-blue-600 hover:underline">Forgot password?</a>
         </div>
-        <Button type="submit" className="w-full">Log in</Button>
+
+        {/* Submit */}
+        <Button
+          type="submit"
+          className="w-full py-2.5 text-white font-medium rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition"
+        >
+          Log in
+        </Button>
       </form>
 
-      {/* Social login */}
+      {/* Separator */}
       <div className="my-6">
         <Separator />
         <p className="text-center text-xs text-gray-500 mt-2">OR LOGIN WITH</p>
       </div>
-      <div className="flex space-x-3">
-        <Button className="w-1/2 bg-blue-600 text-white">Facebook</Button>
-        <Button className="w-1/2 bg-red-600 text-white">Google</Button>
+
+      {/* Social logins */}
+      <div className="flex gap-3">
+        <Button className="w-1/2 bg-blue-800 hover:bg-blue-600 text-white rounded-lg shadow-md flex items-center justify-center gap-2">
+          <FaFacebookF size={16} /> Facebook
+        </Button>
+        <Button className="w-1/2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg shadow-md flex items-center justify-center gap-2">
+          <FaGoogle size={16} /> Google
+        </Button>
       </div>
+
+      {/* Footer */}
+      <p className="text-sm text-center mt-6 text-gray-600">
+        Don’t have an account?{" "}
+        <a href="/register" className="text-blue-600 font-medium hover:underline">
+          Register
+        </a>
+      </p>
     </div>
   )
 }
