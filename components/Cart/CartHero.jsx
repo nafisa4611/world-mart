@@ -2,16 +2,29 @@
 
 export default function CartHero() {
   return (
-    <section className="relative bg-black text-white py-16">
+    <section
+      className="relative bg-black text-white py-20 md:py-28"
+      style={{
+        backgroundImage: `url('/shop-hero-bg.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Overlay */}
       <div className="absolute inset-0 bg-black/50" />
-      <div className="relative container mx-auto text-center">
-        <h1 className="text-4xl font-bold">Shopping Cart</h1>
-        <div className="mt-4 flex justify-center gap-4 text-sm">
-          <span className="font-bold text-primary">Shopping Cart</span>
-          <span>→</span>
-          <span>Checkout</span>
-          <span>→</span>
-          <span>Order Complete</span>
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 text-center">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg">
+          Shopping Cart
+        </h1>
+
+        <div className="mt-6 flex justify-center items-center gap-2 text-sm md:text-base text-gray-300">
+          <span className="font-semibold text-white">Shopping Cart</span>
+          <span className="opacity-50">→</span>
+          <span className="opacity-70">Checkout</span>
+          <span className="opacity-50">→</span>
+          <span className="opacity-50">Order Complete</span>
         </div>
       </div>
     </section>
