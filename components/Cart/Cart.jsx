@@ -1,8 +1,8 @@
-import CartHero from "@/components/cart/CartHero"
-import FreeShippingNotice from "@/components/cart/FreeShippingNotice"
-import CartTable from "@/components/cart/CartTable"
-import CartTotals from "@/components/cart/CartTotals"
-import SuggestedProducts from "@/components/cart/SuggestedProducts"
+import CartHero from "@/components/Cart/CartHero"
+import FreeShippingNotice from "@/components/Cart/FreeShippingNotice"
+import CartTable from "@/components/Cart/CartTable"
+import CartTotals from "@/components/Cart/CartTotals"
+import SuggestedProducts from "@/components/Cart/SuggestedProducts"
 
 export default function Cart() {
   const cartItems = [
