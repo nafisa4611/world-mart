@@ -6,10 +6,10 @@ import SuggestedProducts from "@/components/Cart/SuggestedProducts"
 
 export default function Cart() {
   const cartItems = [
-    { id: 1, name: "Smartphone X", price: 50, quantity: 2, image: "/item.jpg" },
+    { id: 1, name: "Smartphone X", price: 50, quantity: 2, image: "/smartphone.jpg" },
   ]
   const suggested = [
-    { id: 1, name: "Headphones", price: 45, image: "/suggested.jpg" },
+    { id: 1, name: "Headphones", price: 45, image: "/headphones.jpg" },
   ]
 
   return (

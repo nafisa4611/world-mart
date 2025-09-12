@@ -9,28 +9,35 @@ import {
 
 export default function ProductTabs({ description, reviews, brand, shipping }) {
   return (
-    <div className="mt-12">
+    <div className="mt-12 bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
       <Tabs defaultValue="description" className="w-full">
-        <TabsList className="border-b mb-6">
-          <TabsTrigger value="description">Description</TabsTrigger>
-          <TabsTrigger value="reviews">Reviews</TabsTrigger>
-          <TabsTrigger value="brand">About Brand</TabsTrigger>
-          <TabsTrigger value="shipping">Shipping & Delivery</TabsTrigger>
+        <TabsList className="flex border-b border-gray-200 mb-6 space-x-2 overflow-x-auto scrollbar-none">
+          {["description", "reviews", "brand", "shipping"].map((tab) => (
+            <TabsTrigger
+              key={tab}
+              value={tab}
+              className="flex-1 text-sm font-semibold rounded-t-lg px-4 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-all data-[state=active]:bg-teal-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1).replace("-", " & ")}
+            </TabsTrigger>
+          ))}
         </TabsList>
 
         <TabsContent value="description">
-          <div className="prose max-w-none text-gray-700">{description}</div>
+          <div className="prose max-w-none text-gray-700 leading-relaxed transition-all duration-300">
+            {description}
+          </div>
         </TabsContent>
 
         <TabsContent value="reviews">
-          <div className="space-y-4">
+          <div className="space-y-4 transition-all duration-300">
             {reviews.length === 0 ? (
-              <p className="text-gray-500">No reviews yet.</p>
+              <p className="text-gray-500 italic">No reviews yet.</p>
             ) : (
               reviews.map((r, i) => (
-                <div key={i} className="border-b pb-3">
-                  <p className="font-medium">{r.author}</p>
-                  <p className="text-gray-600">{r.text}</p>
+                <div key={i} className="border-b border-gray-100 pb-4">
+                  <p className="font-semibold text-gray-800">{r.author}</p>
+                  <p className="text-gray-600 text-sm">{r.text}</p>
                 </div>
               ))
             )}
@@ -38,12 +45,16 @@ export default function ProductTabs({ description, reviews, brand, shipping }) {
         </TabsContent>
 
         <TabsContent value="brand">
-          <p className="text-gray-600">{brand}</p>
+          <p className="text-gray-600 text-sm leading-relaxed transition-all duration-300">
+            {brand}
+          </p>
         </TabsContent>
 
         <TabsContent value="shipping">
-          <ul className="list-disc list-inside text-gray-600 space-y-1">
-            {shipping.map((s, i) => <li key={i}>{s}</li>)}
+          <ul className="list-disc list-inside text-gray-600 text-sm space-y-1 transition-all duration-300">
+            {shipping.map((s, i) => (
+              <li key={i}>{s}</li>
+            ))}
           </ul>
         </TabsContent>
       </Tabs>

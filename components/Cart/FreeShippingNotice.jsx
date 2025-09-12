@@ -15,7 +15,7 @@ export default function FreeShippingNotice({ goal = 100, current = 65 }) {
       )}
       <div className="mt-2 h-2 w-full bg-gray-300 rounded-full">
         <div
-          className="h-2 bg-primary rounded-full transition-all"
+          className="h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all duration-500 ease-in-out"
           style={{ width: `${progress}%` }}
         />
       </div>
