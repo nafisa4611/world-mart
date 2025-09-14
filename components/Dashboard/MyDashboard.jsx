@@ -22,7 +22,7 @@ export default function MyDashboard() {
         </aside>
         <main className="md:col-span-3 space-y-8">
           {/* Pass dynamic user name/email */}
-          <DashboardHeader customerName={session.user.name || session.user.email} />
+          <DashboardHeader customerName={session.user.name} />
           <QuickActionTiles />
           {/* Example: Empty state for orders */}
           <EmptyState type="orders" />

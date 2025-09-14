@@ -100,13 +100,13 @@ export default function LoginForm() {
       {/* Social logins */}
       <div className="flex gap-3">
         <Button
-          onClick={() => signIn("facebook")}
+          onClick={() => signIn("facebook", { callbackUrl: "/my-dashboard" })}
           className="w-1/2 bg-blue-800 hover:bg-blue-600 text-white rounded-lg shadow-md flex items-center justify-center gap-2"
         >
           <FaFacebookF size={16} /> Facebook
         </Button>
         <Button
-          onClick={() => signIn("google")}
+          onClick={() => signIn("google", { callbackUrl: "/my-dashboard" })}
           className="w-1/2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg shadow-md flex items-center justify-center gap-2"
         >
           <FaGoogle size={16} /> Google

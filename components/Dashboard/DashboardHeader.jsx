@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { signOut } from "next-auth/react"
 
 export default function DashboardHeader({ customerName }) {
   return (
@@ -10,15 +13,16 @@ export default function DashboardHeader({ customerName }) {
         Hello, {customerName}.
       </h2>
 
-      <Link 
-        href="/logout"
-        className="inline-block mt-1 text-sm text-blue-600 font-medium hover:text-blue-500 transition-colors"
+      <button
+        onClick={() => signOut({ callbackUrl: "/login" })}
+        className="inline-block mt-1 text-sm text-blue-600 font-medium hover:text-blue-500 transition-colors cursor-pointer"
       >
         Not {customerName}? Log out
-      </Link>
+      </button>
 
       <p className="text-gray-500 mt-4 leading-relaxed md:text-lg">
-        From your account dashboard you can view recent orders, manage shipping and billing addresses, and edit your password and account details.
+        From your account dashboard you can view recent orders, manage shipping and billing addresses, 
+        and edit your password and account details.
       </p>
 
       {/* Optional subtle background pattern */}
