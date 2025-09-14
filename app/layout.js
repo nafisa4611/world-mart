@@ -1,7 +1,9 @@
+
 import { Roboto } from "next/font/google";
 import TopbarHeader from "@/components/Homepage/Topbar-Header/TopbarHeader";
 import Footer from "@/components/Homepage/Footer";
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -18,14 +20,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased bg-gray-50`}>
-        <TopbarHeader />
-
-        {/* Main container */}
-        <main>
-          {children}
-        </main>
-
-        <Footer />
+        <Providers>
+          <TopbarHeader />
+          {/* Main container */}
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

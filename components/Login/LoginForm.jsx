@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { signIn } from "next-auth/react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -8,12 +9,31 @@ import { Separator } from "@/components/ui/separator"
 import { FaFacebookF, FaGoogle } from "react-icons/fa"
 
 export default function LoginForm() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // fake validation
-    setError("Incorrect username or password.")
+    setLoading(true)
+    setError("")
+
+    // 🔑 Call NextAuth credentials provider
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    })
+
+    if (res?.error) {
+      setError("Incorrect email or password.")
+    } else {
+      // Redirect to dashboard after successful login
+      window.location.href = "/my-dashboard"
+    }
+
+    setLoading(false)
   }
 
   return (
@@ -33,7 +53,10 @@ export default function LoginForm() {
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
           <Input
-            placeholder="Username or email address *"
+            type="email"
+            placeholder="Email address *"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             className="rounded-lg focus:ring-2 focus:ring-blue-500"
           />
@@ -42,6 +65,8 @@ export default function LoginForm() {
           <Input
             type="password"
             placeholder="Password *"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
             className="rounded-lg focus:ring-2 focus:ring-blue-500"
           />
@@ -59,9 +84,10 @@ export default function LoginForm() {
         {/* Submit */}
         <Button
           type="submit"
+          disabled={loading}
           className="w-full py-2.5 text-white font-medium rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition"
         >
-          Log in
+          {loading ? "Logging in..." : "Log in"}
         </Button>
       </form>
 
@@ -73,10 +99,16 @@ export default function LoginForm() {
 
       {/* Social logins */}
       <div className="flex gap-3">
-        <Button className="w-1/2 bg-blue-800 hover:bg-blue-600 text-white rounded-lg shadow-md flex items-center justify-center gap-2">
+        <Button
+          onClick={() => signIn("facebook")}
+          className="w-1/2 bg-blue-800 hover:bg-blue-600 text-white rounded-lg shadow-md flex items-center justify-center gap-2"
+        >
           <FaFacebookF size={16} /> Facebook
         </Button>
-        <Button className="w-1/2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg shadow-md flex items-center justify-center gap-2">
+        <Button
+          onClick={() => signIn("google")}
+          className="w-1/2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg shadow-md flex items-center justify-center gap-2"
+        >
           <FaGoogle size={16} /> Google
         </Button>
       </div>

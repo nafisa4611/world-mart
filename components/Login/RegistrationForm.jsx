@@ -7,11 +7,46 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 export default function RegisterForm() {
   const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // fake validation
-    setError("This email is already registered.")
+    setLoading(true)
+    setError("")
+
+    const formData = new FormData(e.target)
+    const user = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+      confirmPassword: formData.get("confirmPassword"),
+    }
+
+    if (user.password !== user.confirmPassword) {
+      setError("Passwords do not match.")
+      setLoading(false)
+      return
+    }
+
+    try {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) throw new Error(data.message || "Something went wrong")
+
+      alert("Account created! Please log in.")
+      window.location.href = "/login"
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -22,83 +57,47 @@ export default function RegisterForm() {
       </p>
 
       {error && (
-        <p className="text-red-500 text-sm mb-3 text-center bg-red-50 p-2 rounded-md">
-          {error}
-        </p>
+        <p className="text-red-500 text-sm mb-3 text-center bg-red-50 p-2 rounded-md">{error}</p>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Name */}
         <div className="grid grid-cols-2 gap-4">
-          <Input
-            placeholder="First name"
-            className="rounded-lg focus:ring-2 focus:ring-blue-500"
-          />
-          <Input
-            placeholder="Last name"
-            className="rounded-lg focus:ring-2 focus:ring-blue-500"
-          />
+          <Input name="firstName" placeholder="First name" required />
+          <Input name="lastName" placeholder="Last name" required />
         </div>
 
         {/* Email */}
-        <Input
-          type="email"
-          placeholder="Email address *"
-          required
-          className="rounded-lg focus:ring-2 focus:ring-blue-500"
-        />
+        <Input type="email" name="email" placeholder="Email address *" required />
 
         {/* Passwords */}
-        <Input
-          type="password"
-          placeholder="Password *"
-          required
-          className="rounded-lg focus:ring-2 focus:ring-blue-500"
-        />
-        <Input
-          type="password"
-          placeholder="Confirm password *"
-          required
-          className="rounded-lg focus:ring-2 focus:ring-blue-500"
-        />
+        <Input type="password" name="password" placeholder="Password *" required />
+        <Input type="password" name="confirmPassword" placeholder="Confirm password *" required />
 
         {/* Checkboxes */}
         <div className="flex items-start space-x-2">
-          <Checkbox id="terms" />
+          <Checkbox id="terms" required />
           <label htmlFor="terms" className="text-sm text-gray-600">
             I agree to the{" "}
-            <a href="#" className="text-blue-600 hover:underline">
-              Terms
-            </a>{" "}
-            and{" "}
-            <a href="#" className="text-blue-600 hover:underline">
-              Privacy Policy
-            </a>
-          </label>
-        </div>
-
-        <div className="flex items-center space-x-2">
-          <Checkbox id="newsletter" />
-          <label htmlFor="newsletter" className="text-sm text-gray-600">
-            Subscribe to newsletter
+            <a href="#" className="text-blue-600 hover:underline">Terms</a> and{" "}
+            <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
           </label>
         </div>
 
         {/* Button */}
         <Button
           type="submit"
+          disabled={loading}
           className="w-full py-2.5 text-white font-medium rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition"
         >
-          Register
+          {loading ? "Registering..." : "Register"}
         </Button>
       </form>
 
       {/* Footer link */}
       <p className="text-sm text-center mt-6 text-gray-600">
         Already have an account?{" "}
-        <a href="/login" className="text-blue-600 font-medium hover:underline">
-          Log in
-        </a>
+        <a href="/login" className="text-blue-600 font-medium hover:underline">Log in</a>
       </p>
     </div>
   )

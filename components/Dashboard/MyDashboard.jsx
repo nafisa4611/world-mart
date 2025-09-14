@@ -1,4 +1,6 @@
+"use client"
 
+import { useSession } from "next-auth/react"
 import Sidebar from "@/components/Dashboard/Sidebar"
 import DashboardHeader from "@/components/Dashboard/DashboardHeader"
 import QuickActionTiles from "@/components/Dashboard/QuickActionTiles"
@@ -6,6 +8,10 @@ import EmptyState from "@/components/Dashboard/EmptyState"
 import DashboardHero from "./DashboardHero"
 
 export default function MyDashboard() {
+  const { data: session, status } = useSession()
+
+  if (status === "loading") return <p>Loading...</p>
+  if (!session) return <p>Please log in to access your dashboard.</p>
 
   return (
     <>
@@ -15,7 +21,8 @@ export default function MyDashboard() {
           <Sidebar />
         </aside>
         <main className="md:col-span-3 space-y-8">
-          <DashboardHeader customerName="Nafisa Mila" />
+          {/* Pass dynamic user name/email */}
+          <DashboardHeader customerName={session.user.name || session.user.email} />
           <QuickActionTiles />
           {/* Example: Empty state for orders */}
           <EmptyState type="orders" />
