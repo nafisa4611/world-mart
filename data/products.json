@@ -1,0 +1,28 @@
+[
+  { "id": 1, "name": "Smartphone X", "price": 799, "oldPrice": 899, "label": "New", "category": "NEW", "img": "/prod-phone.jpg" },
+  { "id": 2, "name": "Laptop Pro", "price": 1299, "oldPrice": 1499, "label": "-15%", "category": "NEW", "img": "/prod-laptop.jpg" },
+  { "id": 3, "name": "Wireless Headphones", "price": 199, "label": "Hot", "category": "NEW", "img": "/prod-headphone.jpg" },
+  { "id": 4, "name": "Smart Watch", "price": 299, "label": "New", "category": "NEW", "img": "/prod-watch.jpg" },
+  { "id": 5, "name": "Gaming Console", "price": 499, "oldPrice": 599, "label": "-20%", "category": "NEW", "img": "/prod-console.jpg" },
+  { "id": 6, "name": "4K Camera", "price": 899, "category": "NEW", "img": "/prod-camera.jpg" },
+  { "id": 7, "name": "VR Headset", "price": 399, "label": "Hot", "category": "NEW", "img": "/prod-vr.jpg" },
+  { "id": 8, "name": "Bluetooth Speaker", "price": 149, "oldPrice": 199, "label": "-25%", "category": "NEW", "img": "/prod-speaker.jpg" },
+
+  { "id": 2, "name": "Laptop Pro", "price": 1299, "oldPrice": 1499, "label": "-15%", "category": "FEATURED", "img": "/prod-laptop.jpg" },
+  { "id": 3, "name": "Wireless Headphones", "price": 199, "label": "Hot", "category": "FEATURED", "img": "/prod-headphone.jpg" },
+  { "id": 4, "name": "Smart Watch", "price": 299, "label": "New", "category": "FEATURED", "img": "/prod-watch.jpg" },
+  { "id": 6, "name": "4K Camera", "price": 899, "category": "FEATURED", "img": "/prod-camera.jpg" },
+  { "id": 7, "name": "VR Headset", "price": 399, "label": "Hot", "category": "FEATURED", "img": "/prod-vr.jpg" },
+  { "id": 8, "name": "Bluetooth Speaker", "price": 149, "oldPrice": 199, "label": "-25%", "category": "FEATURED", "img": "/prod-speaker.jpg" },
+  { "id": 1, "name": "Smartphone X", "price": 799, "oldPrice": 899, "label": "New", "category": "FEATURED", "img": "/prod-phone.jpg" },
+  { "id": 5, "name": "Gaming Console", "price": 499, "oldPrice": 599, "label": "-20%", "category": "FEATURED", "img": "/prod-console.jpg" },
+
+  { "id": 4, "name": "Smart Watch", "price": 299, "label": "New", "category": "TOPSELLERS", "img": "/prod-watch.jpg" },
+  { "id": 6, "name": "4K Camera", "price": 899, "category": "TOPSELLERS", "img": "/prod-camera.jpg" },
+  { "id": 7, "name": "VR Headset", "price": 399, "label": "Hot", "category": "TOPSELLERS", "img": "/prod-vr.jpg" },
+  { "id": 2, "name": "Laptop Pro", "price": 1299, "oldPrice": 1499, "label": "-15%", "category": "TOPSELLERS", "img": "/prod-laptop.jpg" },
+  { "id": 3, "name": "Wireless Headphones", "price": 199, "label": "Hot", "category": "TOPSELLERS", "img": "/prod-headphone.jpg" },
+  { "id": 8, "name": "Bluetooth Speaker", "price": 149, "oldPrice": 199, "label": "-25%", "category": "TOPSELLERS", "img": "/prod-speaker.jpg" },
+  { "id": 1, "name": "Smartphone X", "price": 799, "oldPrice": 899, "label": "New", "category": "TOPSELLERS", "img": "/prod-phone.jpg" },
+  { "id": 5, "name": "Gaming Console", "price": 499, "oldPrice": 599, "label": "-20%", "category": "TOPSELLERS", "img": "/prod-console.jpg" }
+]
