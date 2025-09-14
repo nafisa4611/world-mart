@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 export async function POST(req) {
   try {
     const client = await clientPromise;
-    const db = client.db("world_mart"); // ✅ use world_mart database
+    const db = client.db("world_mart");
     const body = await req.json();
     const { firstName, lastName, email, password } = body;
 
