@@ -1,17 +1,14 @@
 "use client";
 
-import { ShoppingCart, Heart, Repeat, LogOut, Search } from "lucide-react";
+import { Heart, Repeat, LogOut, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useApp } from "@/context/AppContext";
 import { signOut } from "next-auth/react";
+import CartIcon from "./CartIcon";
 
 export default function Header() {
-  const { user, cart } = useApp();
-  console.log("Header cart render", cart);
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const cartPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
+  const { user } = useApp();
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
@@ -64,16 +61,7 @@ export default function Header() {
           <Heart className="w-5 h-5 cursor-pointer hover:text-red-500 transition" />
           <Repeat className="w-5 h-5 cursor-pointer hover:text-green-500 transition" />
 
-          <div className="relative flex items-center cursor-pointer">
-            <ShoppingCart className="w-6 h-6" />
-
-            {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-1.5 min-w-[20px] h-5 flex items-center justify-center rounded-full shadow-md">
-                {cartCount}
-              </span>
-            )}
-          </div>
-          <span className="ml-2 hidden md:inline font-semibold">${cartPrice}</span>
+          <CartIcon />
         </div>
       </div>
     </header>
