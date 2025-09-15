@@ -1,20 +1,21 @@
-"use client"
+"use client";
 
-import { Search, Heart, Repeat, ShoppingCart } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
-import { useSession, signOut } from "next-auth/react"
+import { ShoppingCart, Heart, Repeat, LogOut, Search } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useApp } from "@/context/AppContext";
+import { signOut } from "next-auth/react";
 
 export default function Header() {
-  const [cartCount] = useState(2)
-  const [cartPrice] = useState(320)
-  const { data: session } = useSession()
+  const { user, cart } = useApp();
+  console.log("Header cart render", cart);
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
         <Link href="/">
           <div className="flex items-center gap-3">
             <Image
@@ -30,13 +31,8 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Search Bar */}
         <div className="flex flex-1 mx-6 max-w-2xl border border-gray-300 rounded-full h-12">
-          <input
-            type="text"
-            placeholder="Search for products..."
-            className="flex-1 px-3"
-          />
+          <input type="text" placeholder="Search for products..." className="flex-1 px-3" />
           <select className="border px-2">
             <option>All Categories</option>
             <option>Smartphones</option>
@@ -48,20 +44,17 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Account & Icons */}
         <div className="flex items-center gap-6 text-gray-700 font-medium">
-          {session ? (
-            <>
-              <span className="hover:text-primary">
-                Hello, {session.user?.name || session.user?.email}
-              </span>
+          {user ? (
+            <div className="flex items-center gap-4">
+              <span className="font-semibold text-primary">Hello, {user.name}</span>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="text-sm text-red-500 hover:text-red-700"
+                className="flex items-center gap-1 text-red-600 hover:text-red-800 text-sm font-medium transition"
               >
-                Logout
+                <LogOut className="w-4 h-4" /> Logout
               </button>
-            </>
+            </div>
           ) : (
             <Link href="/login" className="hover:text-primary">
               Login / Register
@@ -71,18 +64,18 @@ export default function Header() {
           <Heart className="w-5 h-5 cursor-pointer hover:text-red-500 transition" />
           <Repeat className="w-5 h-5 cursor-pointer hover:text-green-500 transition" />
 
-          {/* Cart */}
-          <div className="relative flex items-center cursor-pointer hover:text-primary transition">
+          <div className="relative flex items-center cursor-pointer">
             <ShoppingCart className="w-6 h-6" />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-              {cartCount}
-            </span>
-            <span className="ml-2 hidden md:inline font-semibold">
-              ${cartPrice}
-            </span>
+
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-1.5 min-w-[20px] h-5 flex items-center justify-center rounded-full shadow-md">
+                {cartCount}
+              </span>
+            )}
           </div>
+          <span className="ml-2 hidden md:inline font-semibold">${cartPrice}</span>
         </div>
       </div>
     </header>
-  )
+  );
 }

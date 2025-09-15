@@ -1,6 +1,7 @@
+"use client";
+
 import Header from "./Header";
 import Topbar from "./Topbar";
-
 
 export default function TopbarHeader() {
     return (
@@ -8,6 +9,5 @@ export default function TopbarHeader() {
             <Topbar />
             <Header />
         </>
-
-    )
+    );
 }

@@ -1,4 +1,3 @@
-
 import { Roboto } from "next/font/google";
 import TopbarHeader from "@/components/Homepage/Topbar-Header/TopbarHeader";
 import Footer from "@/components/Homepage/Footer";
@@ -16,16 +15,13 @@ export const metadata = {
   description: "Your one-stop shop for everything",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, session }) {
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased bg-gray-50`}>
-        <Providers>
+        <Providers session={session}>
           <TopbarHeader />
-          {/* Main container */}
-          <main>
-            {children}
-          </main>
+          <main>{children}</main>
           <Footer />
         </Providers>
       </body>
