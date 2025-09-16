@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Heart, Eye, ShoppingCart, RefreshCcw } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useApp } from "@/context/AppContext";
 
 export default function ShopProductCard({ product, view }) {
+  const { addToCart } = useApp();
   const isList = view === "list";
 
   return (
@@ -23,23 +25,22 @@ export default function ShopProductCard({ product, view }) {
         transition={{ type: "spring", stiffness: 120, damping: 12 }}
       >
         <Card
-          className={`relative overflow-hidden border border-gray-100 bg-white/90 backdrop-blur-sm 
+          className={`relative overflow-hidden border border-gray-100 bg-white/90 backdrop-blur-sm
             shadow-[0_4px_20px_rgba(0,0,0,0.06)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]
-            transition-all duration-500 
+            transition-all duration-500
             ${isList ? "flex items-center gap-4 p-4 rounded-lg" : "rounded-2xl"}
           `}
         >
           {/* Badge */}
-          {product.badge && (
+          {product.label && (
             <span
               className={`absolute top-3 left-3 z-10 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white rounded-full shadow-md
-                ${product.badge === "NEW" && "bg-green-500"}
-                ${product.badge === "HOT" && "bg-red-500"}
-                ${product.badge.includes("%") && "bg-blue-600"}
-                ${product.badge === "SOLD OUT" && "bg-gray-500"}
+                ${product.label.toLowerCase() === "new" && "bg-green-500"}
+                ${product.label.toLowerCase() === "hot" && "bg-red-500"}
+                ${product.label.includes("%") && "bg-blue-600"}
               `}
             >
-              {product.badge}
+              {product.label}
             </span>
           )}
 
@@ -51,15 +52,15 @@ export default function ShopProductCard({ product, view }) {
             }`}
           >
             <Image
-              src={product.image}
-              alt={product.title}
+              src={product.img || "/placeholder.png"}
+              alt={product.name || "Product image"}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            {product.hoverImage && (
+            {product.hoverImg && (
               <Image
-                src={product.hoverImage}
-                alt="hover"
+                src={product.hoverImg}
+                alt={product.name + " hover"}
                 fill
                 className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
               />
@@ -87,17 +88,9 @@ export default function ShopProductCard({ product, view }) {
                   </span>
                 )}
               </div>
-
-              {/* Ratings */}
-              {product.rating && (
-                <div className="flex gap-0.5 text-yellow-500 text-xs mt-1">
-                  {"★".repeat(Math.round(product.rating))}
-                  {"☆".repeat(5 - Math.round(product.rating))}
-                </div>
-              )}
             </motion.div>
 
-            {/* For list view */}
+            {/* List View Actions */}
             {isList && (
               <motion.div
                 layout
@@ -106,11 +99,15 @@ export default function ShopProductCard({ product, view }) {
                 className="mt-3 flex items-center justify-between"
               >
                 <p className="text-xs text-gray-500 line-clamp-2">
-                  Premium quality product with modern design, perfect for your home
-                  or office.
+                  {product.description || "Premium quality product with modern design."}
                 </p>
                 <div className="flex gap-2">
-                  <Button size="icon" variant="secondary" className="h-8 w-8 rounded-full shadow">
+                  <Button
+                    size="icon"
+                    variant="secondary"
+                    className="h-8 w-8 rounded-full shadow"
+                    onClick={() => addToCart(product)}
+                  >
                     <ShoppingCart className="h-4 w-4" />
                   </Button>
                   <Button size="icon" variant="secondary" className="h-8 w-8 rounded-full shadow">
@@ -121,7 +118,7 @@ export default function ShopProductCard({ product, view }) {
             )}
           </CardContent>
 
-          {/* Hover Actions (grid only) */}
+          {/* Hover Actions (Grid only) */}
           {!isList && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -130,7 +127,12 @@ export default function ShopProductCard({ product, view }) {
               className="absolute inset-0 flex items-end justify-center pb-4 bg-gradient-to-t from-black/40 via-black/10 to-transparent"
             >
               <div className="flex gap-2">
-                <Button size="icon" variant="secondary" className="h-9 w-9 rounded-full shadow hover:scale-110 transition">
+                <Button
+                  size="icon"
+                  variant="secondary"
+                  className="h-9 w-9 rounded-full shadow hover:scale-110 transition"
+                  onClick={() => addToCart(product)}
+                >
                   <ShoppingCart className="h-4 w-4" />
                 </Button>
                 <Button size="icon" variant="secondary" className="h-9 w-9 rounded-full shadow hover:scale-110 transition">

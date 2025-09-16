@@ -53,7 +53,7 @@ export default function Header() {
               </button>
             </div>
           ) : (
-            <Link href="/login" className="hover:text-primary">
+            <Link href="/login" className="hover:text-primary cursor-pointer">
               Login / Register
             </Link>
           )}

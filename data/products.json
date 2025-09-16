@@ -1,28 +1,429 @@
 [
-  { "id": "new-1", "name": "Smartphone X", "price": 799, "oldPrice": 899, "label": "New", "category": "NEW", "img": "/prod-phone.jpg" },
-  { "id": "new-2", "name": "Laptop Pro", "price": 1299, "oldPrice": 1499, "label": "-15%", "category": "NEW", "img": "/prod-laptop.jpg" },
-  { "id": "new-3", "name": "Wireless Headphones", "price": 199, "label": "Hot", "category": "NEW", "img": "/prod-headphone.jpg" },
-  { "id": "new-4", "name": "Smart Watch", "price": 299, "label": "New", "category": "NEW", "img": "/prod-watch.jpg" },
-  { "id": "new-5", "name": "Gaming Console", "price": 499, "oldPrice": 599, "label": "-20%", "category": "NEW", "img": "/prod-console.jpg" },
-  { "id": "new-6", "name": "4K Camera", "price": 899, "category": "NEW", "img": "/prod-camera.jpg" },
-  { "id": "new-7", "name": "VR Headset", "price": 399, "label": "Hot", "category": "NEW", "img": "/prod-vr.jpg" },
-  { "id": "new-8", "name": "Bluetooth Speaker", "price": 149, "oldPrice": 199, "label": "-25%", "category": "NEW", "img": "/prod-speaker.jpg" },
+  {
+    "id": 1,
+    "title": "Smart Wooden Clock",
+    "category": "Accessories",
+    "price": 599,
+    "oldPrice": 699,
+    "rating": 4.5,
+    "badge": "HOT",
+    "img": "/shop/watch.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Wooden Bow Tie",
+    "category": "Accessories",
+    "price": 129,
+    "rating": 5,
+    "badge": "NEW",
+    "img": "/shop/bowtie.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Designer Chair",
+    "category": "Furniture",
+    "price": 899,
+    "oldPrice": 1199,
+    "rating": 4,
+    "badge": "-25%",
+    "img": "/shop/chair.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Scandinavian Pendant Light",
+    "category": "Lighting",
+    "price": 349,
+    "oldPrice": 449,
+    "rating": 4.5,
+    "badge": "NEW",
+    "img": "/shop/pendant.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Handmade Wooden Toy Car",
+    "category": "Toys",
+    "price": 79,
+    "rating": 4,
+    "badge": "HOT",
+    "img": "/shop/toycar.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Luxury Leather Wallet",
+    "category": "Accessories",
+    "price": 199,
+    "oldPrice": 249,
+    "rating": 5,
+    "badge": "-20%",
+    "img": "/shop/wallet.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Ergonomic Office Chair",
+    "category": "Furniture",
+    "price": 1299,
+    "rating": 4.5,
+    "badge": "SOLD OUT",
+    "img": "/shop/officechair.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Minimal Wall Clock",
+    "category": "Accessories",
+    "price": 249,
+    "rating": 4,
+    "badge": "",
+    "img": "/shop/wallclock.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Modern Floor Lamp",
+    "category": "Lighting",
+    "price": 499,
+    "rating": 4.5,
+    "badge": "HOT",
+    "img": "/shop/floorlamp.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Kids Wooden Puzzle Set",
+    "category": "Toys",
+    "price": 59,
+    "rating": 5,
+    "badge": "NEW",
+    "img": "/shop/puzzle.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Glass Vase",
+    "category": "Home Décor",
+    "price": 89,
+    "rating": 4,
+    "badge": "",
+    "img": "/shop/vase.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Premium Wooden Desk",
+    "category": "Furniture",
+    "price": 1599,
+    "oldPrice": 1899,
+    "rating": 5,
+    "badge": "-15%",
+    "img": "/shop/desk.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Wireless Noise-Canceling Headphones",
+    "category": "Electronics",
+    "price": 299,
+    "oldPrice": 349,
+    "rating": 4.5,
+    "badge": "HOT",
+    "img": "/shop/headphones.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Smart Fitness Band",
+    "category": "Electronics",
+    "price": 129,
+    "rating": 4,
+    "badge": "NEW",
+    "img": "/shop/fitnessband.jpeg"
+  },
+  {
+    "id": 15,
+    "title": "Cast Iron Skillet",
+    "category": "Cooking",
+    "price": 79,
+    "rating": 5,
+    "badge": "-10%",
+    "img": "/shop/skillet.jpeg"
+  },
+  {
+    "id": 16,
+    "title": "Wooden Cutting Board",
+    "category": "Cooking",
+    "price": 39,
+    "rating": 4.5,
+    "badge": "HOT",
+    "img": "/shop/cuttingboard.png"
+  },
+  {
+    "id": 17,
+    "title": "Abstract Wall Art",
+    "category": "Home Décor",
+    "price": 159,
+    "rating": 4.5,
+    "badge": "NEW",
+    "img": "/shop/wallart.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Ceramic Table Lamp",
+    "category": "Lighting",
+    "price": 229,
+    "oldPrice": 279,
+    "rating": 4,
+    "badge": "-15%",
+    "img": "/shop/tablelamp.jpeg"
+  },
+  {
+    "id": 19,
+    "title": "Leather Crossbody Bag",
+    "category": "Accessories",
+    "price": 349,
+    "rating": 5,
+    "badge": "HOT",
+    "img": "/shop/crossbody.jpg"
+  },
+  {
+    "id": 20,
+    "title": "Classic Aviator Sunglasses",
+    "category": "Accessories",
+    "price": 149,
+    "rating": 4.5,
+    "badge": "NEW",
+    "img": "/shop/sunglasses.jpg"
+  },
+  {
+    "id": 21,
+    "title": "Stuffed Teddy Bear",
+    "category": "Toys",
+    "price": 49,
+    "rating": 5,
+    "badge": "HOT",
+    "img": "/shop/teddy.jpg"
+  },
+  {
+    "id": 22,
+    "title": "Wooden Train Set",
+    "category": "Toys",
+    "price": 99,
+    "rating": 4.5,
+    "badge": "-20%",
+    "img": "/shop/trainset.jpg"
+  },
+  {
+    "id": 23,
+    "title": "Portable Camping Chair",
+    "category": "Outdoor",
+    "price": 119,
+    "rating": 4,
+    "badge": "NEW",
+    "img": "/shop/campingchair.jpg"
+  },
+  {
+    "id": 24,
+    "title": "Insulated Water Bottle",
+    "category": "Outdoor",
+    "price": 39,
+    "rating": 5,
+    "badge": "HOT",
+    "img": "/shop/waterbottle.jpg"
+  },
 
-  { "id": "featured-1", "name": "Laptop Pro", "price": 1299, "oldPrice": 1499, "label": "-15%", "category": "FEATURED", "img": "/prod-laptop.jpg" },
-  { "id": "featured-2", "name": "Wireless Headphones", "price": 199, "label": "Hot", "category": "FEATURED", "img": "/prod-headphone.jpg" },
-  { "id": "featured-3", "name": "Smart Watch", "price": 299, "label": "New", "category": "FEATURED", "img": "/prod-watch.jpg" },
-  { "id": "featured-4", "name": "4K Camera", "price": 899, "category": "FEATURED", "img": "/prod-camera.jpg" },
-  { "id": "featured-5", "name": "VR Headset", "price": 399, "label": "Hot", "category": "FEATURED", "img": "/prod-vr.jpg" },
-  { "id": "featured-6", "name": "Bluetooth Speaker", "price": 149, "oldPrice": 199, "label": "-25%", "category": "FEATURED", "img": "/prod-speaker.jpg" },
-  { "id": "featured-7", "name": "Smartphone X", "price": 799, "oldPrice": 899, "label": "New", "category": "FEATURED", "img": "/prod-phone.jpg" },
-  { "id": "featured-8", "name": "Gaming Console", "price": 499, "oldPrice": 599, "label": "-20%", "category": "FEATURED", "img": "/prod-console.jpg" },
+  {
+    "id": "new-1",
+    "title": "Smartphone X",
+    "category": "NEW",
+    "price": 799,
+    "oldPrice": 899,
+    "badge": "New",
+    "img": "/prod-phone.jpg"
+  },
+  {
+    "id": "new-2",
+    "title": "Laptop Pro",
+    "category": "NEW",
+    "price": 1299,
+    "oldPrice": 1499,
+    "badge": "-15%",
+    "img": "/prod-laptop.jpg"
+  },
+  {
+    "id": "new-3",
+    "title": "Wireless Headphones",
+    "category": "NEW",
+    "price": 199,
+    "badge": "Hot",
+    "img": "/prod-headphone.jpg"
+  },
+  {
+    "id": "new-4",
+    "title": "Smart Watch",
+    "category": "NEW",
+    "price": 299,
+    "badge": "New",
+    "img": "/prod-watch.jpg"
+  },
+  {
+    "id": "new-5",
+    "title": "Gaming Console",
+    "category": "NEW",
+    "price": 499,
+    "oldPrice": 599,
+    "badge": "-20%",
+    "img": "/prod-console.jpg"
+  },
+  {
+    "id": "new-6",
+    "title": "4K Camera",
+    "category": "NEW",
+    "price": 899,
+    "img": "/prod-camera.jpg"
+  },
+  {
+    "id": "new-7",
+    "title": "VR Headset",
+    "category": "NEW",
+    "price": 399,
+    "badge": "Hot",
+    "img": "/prod-vr.jpg"
+  },
+  {
+    "id": "new-8",
+    "title": "Bluetooth Speaker",
+    "category": "NEW",
+    "price": 149,
+    "oldPrice": 199,
+    "badge": "-25%",
+    "img": "/prod-speaker.jpg"
+  },
 
-  { "id": "topsellers-1", "name": "Smart Watch", "price": 299, "label": "New", "category": "TOPSELLERS", "img": "/prod-watch.jpg" },
-  { "id": "topsellers-2", "name": "4K Camera", "price": 899, "category": "TOPSELLERS", "img": "/prod-camera.jpg" },
-  { "id": "topsellers-3", "name": "VR Headset", "price": 399, "label": "Hot", "category": "TOPSELLERS", "img": "/prod-vr.jpg" },
-  { "id": "topsellers-4", "name": "Laptop Pro", "price": 1299, "oldPrice": 1499, "label": "-15%", "category": "TOPSELLERS", "img": "/prod-laptop.jpg" },
-  { "id": "topsellers-5", "name": "Wireless Headphones", "price": 199, "label": "Hot", "category": "TOPSELLERS", "img": "/prod-headphone.jpg" },
-  { "id": "topsellers-6", "name": "Bluetooth Speaker", "price": 149, "oldPrice": 199, "label": "-25%", "category": "TOPSELLERS", "img": "/prod-speaker.jpg" },
-  { "id": "topsellers-7", "name": "Smartphone X", "price": 799, "oldPrice": 899, "label": "New", "category": "TOPSELLERS", "img": "/prod-phone.jpg" },
-  { "id": "topsellers-8", "name": "Gaming Console", "price": 499, "oldPrice": 599, "label": "-20%", "category": "TOPSELLERS", "img": "/prod-console.jpg" }
+  {
+    "id": "featured-1",
+    "title": "Laptop Pro",
+    "category": "FEATURED",
+    "price": 1299,
+    "oldPrice": 1499,
+    "badge": "-15%",
+    "img": "/prod-laptop.jpg"
+  },
+  {
+    "id": "featured-2",
+    "title": "Wireless Headphones",
+    "category": "FEATURED",
+    "price": 199,
+    "badge": "Hot",
+    "img": "/prod-headphone.jpg"
+  },
+  {
+    "id": "featured-3",
+    "title": "Smart Watch",
+    "category": "FEATURED",
+    "price": 299,
+    "badge": "New",
+    "img": "/prod-watch.jpg"
+  },
+  {
+    "id": "featured-4",
+    "title": "4K Camera",
+    "category": "FEATURED",
+    "price": 899,
+    "img": "/prod-camera.jpg"
+  },
+  {
+    "id": "featured-5",
+    "title": "VR Headset",
+    "category": "FEATURED",
+    "price": 399,
+    "badge": "Hot",
+    "img": "/prod-vr.jpg"
+  },
+  {
+    "id": "featured-6",
+    "title": "Bluetooth Speaker",
+    "category": "FEATURED",
+    "price": 149,
+    "oldPrice": 199,
+    "badge": "-25%",
+    "img": "/prod-speaker.jpg"
+  },
+  {
+    "id": "featured-7",
+    "title": "Smartphone X",
+    "category": "FEATURED",
+    "price": 799,
+    "oldPrice": 899,
+    "badge": "New",
+    "img": "/prod-phone.jpg"
+  },
+  {
+    "id": "featured-8",
+    "title": "Gaming Console",
+    "category": "FEATURED",
+    "price": 499,
+    "oldPrice": 599,
+    "badge": "-20%",
+    "img": "/prod-console.jpg"
+  },
+
+  {
+    "id": "topsellers-1",
+    "title": "Smart Watch",
+    "category": "TOPSELLERS",
+    "price": 299,
+    "badge": "New",
+    "img": "/prod-watch.jpg"
+  },
+  {
+    "id": "topsellers-2",
+    "title": "4K Camera",
+    "category": "TOPSELLERS",
+    "price": 899,
+    "img": "/prod-camera.jpg"
+  },
+  {
+    "id": "topsellers-3",
+    "title": "VR Headset",
+    "category": "TOPSELLERS",
+    "price": 399,
+    "badge": "Hot",
+    "img": "/prod-vr.jpg"
+  },
+  {
+    "id": "topsellers-4",
+    "title": "Laptop Pro",
+    "category": "TOPSELLERS",
+    "price": 1299,
+    "oldPrice": 1499,
+    "badge": "-15%",
+    "img": "/prod-laptop.jpg"
+  },
+  {
+    "id": "topsellers-5",
+    "title": "Wireless Headphones",
+    "category": "TOPSELLERS",
+    "price": 199,
+    "badge": "Hot",
+    "img": "/prod-headphone.jpg"
+  },
+  {
+    "id": "topsellers-6",
+    "title": "Bluetooth Speaker",
+    "category": "TOPSELLERS",
+    "price": 149,
+    "oldPrice": 199,
+    "badge": "-25%",
+    "img": "/prod-speaker.jpg"
+  },
+  {
+    "id": "topsellers-7",
+    "title": "Smartphone X",
+    "category": "TOPSELLERS",
+    "price": 799,
+    "oldPrice": 899,
+    "badge": "New",
+    "img": "/prod-phone.jpg"
+  },
+  {
+    "id": "topsellers-8",
+    "title": "Gaming Console",
+    "category": "TOPSELLERS",
+    "price": 499,
+    "oldPrice": 599,
+    "badge": "-20%",
+    "img": "/prod-console.jpg"
+  }
 ]

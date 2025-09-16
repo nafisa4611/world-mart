@@ -10,6 +10,7 @@ export function AppProvider({ children }) {
   const { data: session } = useSession();
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
+  const [discount, setDiscount] = useState(0);
 
   // Sync user with session
   useEffect(() => {
@@ -38,7 +39,7 @@ export function AppProvider({ children }) {
   // Save cart to MongoDB whenever cart changes
   useEffect(() => {
     const saveCart = async () => {
-      if (!session?.user?.email || cart.length === 0) return;
+      if (!session?.user?.email) return;
 
       try {
         await axios.post("/api/cart", {
@@ -54,18 +55,26 @@ export function AppProvider({ children }) {
     saveCart();
   }, [cart, session]);
 
-
   // --- Cart actions ---
   const addToCart = (product) => {
     setCart((prev) => {
       const key = product.id + "-" + product.category;
       const existing = prev.find((p) => p.id + "-" + p.category === key);
+
+      const cartItem = {
+        ...product,
+        quantity: 1,
+        img: product.img || "/placeholder.png", // ✅ use img from JSON
+      };
+
       if (existing) {
         return prev.map((p) =>
-          p.id + "-" + p.category === key ? { ...p, quantity: p.quantity + 1 } : p
+          p.id + "-" + p.category === key
+            ? { ...p, quantity: p.quantity + 1 }
+            : p
         );
       } else {
-        return [...prev, { ...product, quantity: 1 }];
+        return [...prev, cartItem];
       }
     });
   };
@@ -80,9 +89,34 @@ export function AppProvider({ children }) {
       )
     );
 
+  // --- Coupon logic ---
+  const applyCoupon = (code) => {
+    const coupons = {
+      SAVE10: 10, // 10% off
+      SAVE20: 20, // 20% off
+      FREESHIP: 0, // handled separately if needed
+    };
+
+    if (coupons[code]) {
+      setDiscount(coupons[code]);
+      return { success: true, discount: coupons[code] };
+    } else {
+      setDiscount(0);
+      return { success: false };
+    }
+  };
+
   return (
     <AppContext.Provider
-      value={{ user, cart, addToCart, removeFromCart, updateQuantity }}
+      value={{
+        user,
+        cart,
+        discount,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        applyCoupon,
+      }}
     >
       {children}
     </AppContext.Provider>

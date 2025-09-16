@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ShoppingCart, Heart, Eye, Repeat } from "lucide-react"
 import products from "@/data/products.json"
 import { useApp } from "@/context/AppContext"
+import { useRouter } from "next/navigation"
 
 export default function ProductShowcase() {
   // --- Tabs ---
@@ -25,9 +26,15 @@ export default function ProductShowcase() {
   const displayedProducts = products.filter(p => p.category === activeTab)
 
   // --- Context actions ---
-  const { addToCart } = useApp()
+  const { addToCart, user } = useApp()
+  const router = useRouter()
 
   const handleAddToCart = (p) => {
+    if (!user) {
+      // not logged in → redirect to login
+      router.push("/login")
+      return
+    }
     addToCart(p)
     console.log("Added to Cart:", p.name)
   }
@@ -58,10 +65,10 @@ export default function ProductShowcase() {
 
       {/* Product Grid */}
       <div className="rounded-3xl shadow-2xl p-6 bg-white/60 backdrop-blur-sm">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 cursor-pointer">
           {displayedProducts.map(p => (
             <div
-              key={p.id} // ✅ now safe because IDs are globally unique
+              key={p.id}
               className="group relative rounded-2xl bg-white border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-500 overflow-hidden"
             >
               {/* Badge */}
@@ -98,7 +105,7 @@ export default function ProductShowcase() {
                 </div>
                 <Button
                   size="sm"
-                  className="mt-4 w-full rounded-full bg-gradient-to-r from-blue-700 to-indigo-900 text-white hover:scale-105 hover:shadow-lg transition"
+                  className="mt-4 w-full rounded-full cursor-pointer bg-gradient-to-r from-blue-700 to-indigo-900 text-white hover:scale-105 hover:shadow-lg transition"
                   onClick={() => handleAddToCart(p)}
                 >
                   <ShoppingCart className="w-4 h-4 mr-2" /> Add to Cart
