@@ -64,13 +64,13 @@ export default function CartTable({ items }) {
                 <td className="flex items-center gap-4 py-4">
                   <Image
                     src={item.img || "/placeholder.png"}
-                    alt={item.name}
+                    alt={item.name || "Product image"}
                     width={60}
                     height={60}
-                    className="rounded-lg object-cover"
+                    className="object-cover rounded-lg"
                   />
-                  <span className="font-medium text-gray-700">{item.name}</span>
                 </td>
+
 
                 {/* Price */}
                 <td className="py-4 text-gray-700">${item.price.toFixed(2)}</td>

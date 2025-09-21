@@ -11,6 +11,8 @@ export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [discount, setDiscount] = useState(0);
+  const [freeShippingGoal] = useState(200);
+  
 
   // Sync user with session
   useEffect(() => {
@@ -64,7 +66,7 @@ export function AppProvider({ children }) {
       const cartItem = {
         ...product,
         quantity: 1,
-        img: product.img || "/placeholder.png", // ✅ use img from JSON
+        img: product.img || "/placeholder.png", 
       };
 
       if (existing) {
@@ -106,6 +108,40 @@ export function AppProvider({ children }) {
     }
   };
 
+  // --- Place order function ---
+const placeOrder = async (orderData) => {
+  if (!cart?.length) return { success: false, message: "Cart is empty" }
+  if (!orderData?.billing || !orderData?.shippingAddress) {
+    return { success: false, message: "Billing and shipping addresses are required" }
+  }
+
+  try {
+    const res = await axios.post("/api/orders", {
+      userEmail: user.email,
+      cart,
+      subtotal: orderData.subtotal,
+      shipping: orderData.shipping,
+      discount: orderData.discount,
+      total: orderData.total,
+      billing: orderData.billing,
+      shippingAddress: orderData.shippingAddress,
+    })
+
+    if (res.data?.success) {
+      console.log("Order placed:", res.data)
+      setCart([])
+      setDiscount(0)
+    }
+
+    return res.data
+  } catch (err) {
+    console.error("Order error", err)
+    return { success: false, message: err.response?.data?.error || err.message }
+  }
+}
+
+
+
   return (
     <AppContext.Provider
       value={{
@@ -116,6 +152,8 @@ export function AppProvider({ children }) {
         removeFromCart,
         updateQuantity,
         applyCoupon,
+        freeShippingGoal,
+        placeOrder
       }}
     >
       {children}

@@ -59,8 +59,9 @@ export default function Header() {
           )}
 
           <Heart className="w-5 h-5 cursor-pointer hover:text-red-500 transition" />
-          <Repeat className="w-5 h-5 cursor-pointer hover:text-green-500 transition" />
-
+          <Link href="/checkout">
+            <Repeat className="w-5 h-5 cursor-pointer hover:text-green-500 transition" />
+          </Link>
           <CartIcon />
         </div>
       </div>

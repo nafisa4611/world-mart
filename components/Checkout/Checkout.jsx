@@ -1,3 +1,7 @@
+"use client"
+
+import { useState } from "react"
+import { useApp } from "@/context/AppContext"
 import CheckoutHero from "./CheckoutHero"
 import CouponNotice from "./CouponNotice"
 import FreeShippingBar from "./FreeShippingBar"
@@ -5,16 +9,74 @@ import BillingForm from "./BillingForm"
 import OrderSummary from "./OrderSummary"
 
 export default function Checkout() {
+  const { cart, discount, user, placeOrder } = useApp()
+  const [formData, setFormData] = useState({ billing: {}, shipping: {} })
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState("")
+
+  const subtotal = cart.reduce((acc, p) => acc + p.price * p.quantity, 0)
+  const shipping = subtotal > 100 ? 10 : 20
+  const total = subtotal + shipping - (subtotal * (discount / 100))
+
+ const handlePlaceOrder = async () => {
+  if (!user?.email) {
+    setMessage("⚠ Please login to place your order.")
+    return
+  }
+
+  // Check if required billing fields are filled
+  const requiredFields = ["firstName", "lastName", "country", "address", "city", "state", "phone", "email"]
+  const missing = requiredFields.filter((field) => !formData.billing?.[field])
+
+  if (missing.length > 0) {
+    setMessage("⚠ Please fill in all required billing details.")
+    return
+  }
+
+  setLoading(true)
+  setMessage("")
+
+  const res = await placeOrder({
+    cart,
+    subtotal,
+    discount,
+    shipping,
+    total,
+    billing: formData.billing,
+    shippingAddress: formData.shipping,
+  })
+
+  if (res.success) {
+    setMessage("✅ Order placed successfully!")
+    // router.push(`/order-success/${res.orderId}`)
+  } else {
+    setMessage(`❌ ${res.message || "Failed to place order."}`)
+  }
+
+  setLoading(false)
+}
+
+
   return (
     <div>
       <CheckoutHero />
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-6">
           <CouponNotice />
-          <FreeShippingBar current={50} goal={200} />
-          <BillingForm />
+          <FreeShippingBar current={subtotal} goal={200} />
+          <BillingForm onChange={setFormData} />
         </div>
-        <OrderSummary />
+
+        <OrderSummary
+          cart={cart}
+          subtotal={subtotal}
+          shipping={shipping}
+          discount={discount}
+          total={total}
+          placeOrder={handlePlaceOrder}
+          loading={loading}
+          message={message}
+        />
       </div>
     </div>
   )

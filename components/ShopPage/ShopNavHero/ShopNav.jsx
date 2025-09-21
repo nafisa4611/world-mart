@@ -6,7 +6,7 @@ import ShopCategorySidebar from "./ShopCategorySidebar"
 
 export default function ShopNav() {
   return (
-    <div className="border-b border-gray-200 bg-white relative z-50">
+    <div className="border-b border-gray-200 bg-white relative z-30">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 text-gray-800">
 
         {/* Left: Browse Categories */}

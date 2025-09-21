@@ -36,7 +36,7 @@ export default function ProductShowcase() {
       return
     }
     addToCart(p)
-    console.log("Added to Cart:", p.name)
+    console.log("Added to Cart:", p.title)
   }
 
   return (
@@ -81,12 +81,12 @@ export default function ProductShowcase() {
               )}
 
               {/* Image */}
-              <div className="relative h-64 flex items-center justify-center bg-gray-50 overflow-hidden">
+              <div className="relative h-64 w-full flex items-center justify-center bg-gray-50 overflow-hidden">
                 <Image
                   src={p.img}
-                  alt={p.name}
+                  alt={p.title || "Product image"} 
                   fill
-                  className="object-cover h-64 transition-transform duration-700 group-hover:scale-110"
+                  className="object-contain"
                 />
                 <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-all" />
                 <div className="absolute top-4 right-4 flex flex-col gap-3 opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
@@ -98,7 +98,7 @@ export default function ProductShowcase() {
 
               {/* Product Info */}
               <div className="p-4 text-center">
-                <h3 className="text-base font-semibold text-gray-800 truncate">{p.name}</h3>
+                <h3 className="text-base font-semibold text-gray-800 truncate">{p.title}</h3>
                 <div className="flex items-center justify-center gap-2 mt-2">
                   <p className="text-lg text-primary font-bold">${p.price}</p>
                   {p.oldPrice && <p className="text-gray-400 line-through text-sm">${p.oldPrice}</p>}
