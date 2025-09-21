@@ -7,9 +7,9 @@ export default function MainNav() {
   return (
     <div className="border-b border-gray-200 bg-white relative z-30">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 text-gray-800">
-        
+
         {/* Left: Browse Categories */}
-        <button className="flex items-center bg-blue-500 text-white font-semibold h-16 w-64">
+        <button className="flex items-center bg-blue-500 text-white font-semibold h-16 w-72">
           <div className="flex items-center justify-between w-full px-5">
             <Menu className="w-5 h-5" />
             <span className="flex-1 text-left uppercase tracking-wide">
@@ -19,9 +19,10 @@ export default function MainNav() {
           </div>
         </button>
 
+
         {/* Center: Main Menu */}
         <nav className="flex flex-1 justify-center gap-10 font-medium text-sm uppercase tracking-wide">
-          
+
           {/* Home */}
           <div className="relative group">
             <Link href="/" className="flex items-center gap-1 hover:text-blue-500 transition-colors">
