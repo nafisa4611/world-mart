@@ -126,6 +126,7 @@ const placeOrder = async (orderData) => {
       total: orderData.total,
       billing: orderData.billing,
       shippingAddress: orderData.shippingAddress,
+      ...orderData
     })
 
     if (res.data?.success) {

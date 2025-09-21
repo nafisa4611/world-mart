@@ -60,33 +60,29 @@ export default function Checkout() {
         shippingAddress: formData.shipping,
       });
 
-      if (!res.success) {
-        setMessage(`❌ ${res.message || "Failed to place order."}`);
-        setLoading(false);
-        return;
-      }
+      if (res.success) {
+        // Call Stripe API to create checkout session
+        const stripeRes = await fetch("/api/checkout-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderId: res.orderId, total }),
+        });
 
-      // 2️⃣ Create Stripe checkout session
-      const stripeRes = await fetch("/api/checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderId: res.orderId, total }),
-      });
-
-      const data = await stripeRes.json();
-      if (data.url) {
-        // Redirect to Stripe Checkout
-        window.location.href = data.url;
-      } else {
-        setMessage("❌ Failed to initiate payment.");
+        const data = await stripeRes.json();
+        if (data.url) {
+          // Redirect to Stripe Checkout
+          window.location.href = data.url;
+        } else {
+          setMessage(`❌ ${res.message || "Failed to place order."}`);
+        }
       }
     } catch (err) {
       console.error(err);
       setMessage("❌ Error placing order or initiating payment.");
     } finally {
       setLoading(false);
-    }
-  };
+    };
+  }
 
   return (
     <div>
