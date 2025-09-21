@@ -21,7 +21,12 @@ export default function RootLayout({ children, session }) {
       <body className={`${roboto.variable} antialiased bg-gray-50`}>
         <Providers session={session}>
           <TopbarHeader />
-          <main>{children}</main>
+
+          {/* Constrain width */}
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {children}
+          </main>
+
           <Footer />
         </Providers>
       </body>
