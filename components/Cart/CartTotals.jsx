@@ -9,8 +9,10 @@ import Link from "next/link";
 export default function CartTotals() {
   const { cart, discount, applyCoupon } = useApp();
   const [couponCode, setCouponCode] = useState("");
-  const [shipping, setShipping] = useState(10); // default shipping
   const [subtotal, setSubtotal] = useState(0);
+
+  // Dynamic shipping logic
+  const shipping = subtotal > 100 ? 10 : 20;
 
   useEffect(() => {
     const sum = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -38,6 +40,12 @@ export default function CartTotals() {
           <span>${subtotal.toFixed(2)}</span>
         </div>
 
+        {/* Shipping */}
+        <div className="flex justify-between text-gray-700 font-medium text-lg">
+          <span>Shipping</span>
+          <span>${shipping.toFixed(2)}</span>
+        </div>
+
         {/* Coupon */}
         <div className="space-y-2">
           <input
@@ -57,7 +65,6 @@ export default function CartTotals() {
             <p className="text-green-600 text-sm">Coupon applied: {discount}% OFF</p>
           )}
         </div>
-        
 
         {/* Total */}
         <div className="flex justify-between items-center font-bold text-2xl text-gray-900 border-t border-gray-200 pt-4">
