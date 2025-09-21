@@ -110,7 +110,8 @@ export function AppProvider({ children }) {
 
   // --- Place order function ---
 const placeOrder = async (orderData) => {
-  if (!cart?.length) return { success: false, message: "Cart is empty" }
+  if (!cart?.length) 
+    return { success: false, message: "Cart is empty" }
   if (!orderData?.billing || !orderData?.shippingAddress) {
     return { success: false, message: "Billing and shipping addresses are required" }
   }
