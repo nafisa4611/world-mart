@@ -2,28 +2,27 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useApp } from "@/context/AppContext"; // ✅ use your App context
-import { useState } from "react";
+import { useApp } from "@/context/AppContext";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function CartTotals() {
   const { cart, discount, applyCoupon } = useApp();
   const [couponCode, setCouponCode] = useState("");
-  const [shipping, setShipping] = useState(20);
+  const [shipping, setShipping] = useState(10); // default shipping
+  const [subtotal, setSubtotal] = useState(0);
 
-  // Calculate subtotal dynamically
-  const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  useEffect(() => {
+    const sum = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setSubtotal(sum);
+  }, [cart]);
 
-  // Apply discount
   const discountedSubtotal = subtotal - (subtotal * discount) / 100;
-
-  // Final total
   const total = discountedSubtotal + shipping;
 
   const handleApplyCoupon = () => {
     const result = applyCoupon(couponCode);
-    if (!result.success) {
-      alert("Invalid coupon code");
-    }
+    if (!result.success) alert("Invalid coupon code");
   };
 
   const shippingOptions = [
@@ -60,9 +59,7 @@ export default function CartTotals() {
             Apply Coupon
           </Button>
           {discount > 0 && (
-            <p className="text-green-600 text-sm">
-              Coupon applied: {discount}% OFF
-            </p>
+            <p className="text-green-600 text-sm">Coupon applied: {discount}% OFF</p>
           )}
         </div>
 
@@ -101,9 +98,11 @@ export default function CartTotals() {
         </div>
 
         {/* Checkout Button */}
-        <Button className="w-full py-3 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
-          Proceed to Checkout
-        </Button>
+        <Link href="/checkout">
+          <Button className="w-full py-3 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300">
+            Proceed to Checkout
+          </Button>
+        </Link>
 
         <p className="text-xs text-gray-400 text-center">
           Taxes and shipping calculated at checkout.
