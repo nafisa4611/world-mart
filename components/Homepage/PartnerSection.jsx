@@ -20,34 +20,32 @@ const partners = [
 export default function PartnersSection() {
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
-      {/* Section Title with Bars */}
+      {/* Section Title */}
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-3xl font-bold uppercase">Our Partners</h2>
         <div className="h-[2px] w-24 bg-blue-600 mx-auto mt-3"></div>
-        <div className="border-t border-b border-gray-200 "></div>
+        <div className="border-t border-b border-gray-200 mt-2"></div>
       </div>
 
       {/* Two-column Layout */}
       <div className="flex flex-col lg:flex-row gap-8 items-stretch">
         {/* Left: YouTube Video */}
-        <div className="w-full lg:w-1/2 h-64">
-          <div className="w-full h-full">
-            <iframe
-              className="w-full h-full rounded-lg"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="YouTube video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
+        <div className="w-full lg:w-1/2 aspect-video rounded-lg overflow-hidden shadow-xl">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
 
         {/* Right: Partner Logos Grid */}
-        <div className="w-full lg:w-1/2 grid grid-cols-4 grid-rows-3 gap-6 items-center justify-items-center pb-4 h-64">
+        <div className="w-full lg:w-1/2 grid grid-cols-3 sm:grid-cols-4 gap-4 sm:gap-6 items-center justify-items-center">
           {partners.map((partner) => (
             <div
               key={partner.id}
-              className="flex justify-center items-center shadow-xl grayscale hover:grayscale-0 hover:scale-105 transition duration-300"
+              className="flex justify-center items-center shadow-xl grayscale hover:grayscale-0 hover:scale-105 transition duration-300 p-2 bg-white rounded"
             >
               <Image
                 src={partner.logo}
