@@ -17,7 +17,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <select className="bg-blue-950 text-white px-2 h-10 flex items-center focus:outline-none appearance-none">
               <option>ENGLISH</option>
-              <option>SPANISH</option>
+              <option>BANGLA</option>
             </select>
 
             <div className="h-6 border-l border-white" />
