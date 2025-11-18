@@ -21,14 +21,18 @@ export default function ShopProductCard({ product, view }) {
     >
       <motion.div
         className="relative group"
-        whileHover={{ rotateX: 4, rotateY: -4 }}
+        whileHover={!isList ? { rotateX: 4, rotateY: -4 } : {}}
         transition={{ type: "spring", stiffness: 120, damping: 12 }}
       >
         <Card
           className={`relative overflow-hidden border border-gray-100 bg-white/90 backdrop-blur-sm
             shadow-[0_4px_20px_rgba(0,0,0,0.06)] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]
             transition-all duration-500
-            ${isList ? "flex items-center gap-4 p-4 rounded-lg" : "rounded-2xl"}
+            ${
+              isList
+                ? "flex flex-col sm:flex-row items-center gap-4 p-4 rounded-lg"
+                : "rounded-2xl"
+            }
           `}
         >
           {/* Badge */}
@@ -47,9 +51,13 @@ export default function ShopProductCard({ product, view }) {
           {/* Product Image */}
           <motion.div
             layout
-            className={`relative overflow-hidden ${
-              isList ? "w-40 h-40 flex-shrink-0 rounded-lg" : "w-full aspect-square"
-            }`}
+            className={`relative overflow-hidden
+              ${
+                isList
+                  ? "w-full sm:w-40 h-40 flex-shrink-0 rounded-lg"
+                  : "w-full aspect-square"
+              }
+            `}
           >
             <Image
               src={product.img || "/placeholder.png"}
@@ -57,10 +65,11 @@ export default function ShopProductCard({ product, view }) {
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            {product.hoverImg && (
+
+            {product.hoverImg && !isList && (
               <Image
                 src={product.hoverImg}
-                alt={product.name + " hover"}
+                alt={`${product.name} hover`}
                 fill
                 className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
               />
@@ -68,20 +77,21 @@ export default function ShopProductCard({ product, view }) {
           </motion.div>
 
           {/* Product Info */}
-          <CardContent className={`${isList ? "flex-1 p-0" : "p-4 space-y-2"}`}>
+          <CardContent
+            className={`${isList ? "flex-1 px-1 sm:px-0 p-0" : "p-4 space-y-2"}`}
+          >
             <motion.div layout>
               <p className="text-[11px] text-gray-500 uppercase tracking-wider">
                 {product.category}
               </p>
+
               <h4 className="text-sm font-semibold text-gray-900 truncate group-hover:text-blue-600 transition-colors">
                 {product.title}
               </h4>
 
               {/* Price */}
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-base font-bold text-blue-600">
-                  ${product.price}
-                </span>
+                <span className="text-base font-bold text-blue-600">${product.price}</span>
                 {product.oldPrice && (
                   <span className="line-through text-xs text-gray-400">
                     ${product.oldPrice}
@@ -96,11 +106,13 @@ export default function ShopProductCard({ product, view }) {
                 layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="mt-3 flex items-center justify-between"
+                className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
               >
-                <p className="text-xs text-gray-500 line-clamp-2">
-                  {product.description || "Premium quality product with modern design."}
+                <p className="text-xs text-gray-500 line-clamp-2 sm:pr-3">
+                  {product.description ||
+                    "Premium quality product with modern design."}
                 </p>
+
                 <div className="flex gap-2">
                   <Button
                     size="icon"
@@ -118,7 +130,7 @@ export default function ShopProductCard({ product, view }) {
             )}
           </CardContent>
 
-          {/* Hover Actions (Grid only) */}
+          {/* Hover Actions (Grid Only) */}
           {!isList && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}

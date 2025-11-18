@@ -33,7 +33,8 @@ export default function ShopToolbar({
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="flex flex-wrap justify-between items-center bg-white shadow-sm border border-gray-100 rounded-xl px-5 py-4 mb-6">
+    <div className="relative flex flex-wrap md:flex-nowrap justify-between items-center bg-white shadow-sm border border-gray-100 rounded-xl px-4 sm:px-5 py-3 sm:py-4 mb-6 gap-4">
+      
       {/* Left side: Nav Menu */}
       <div className="flex items-center">
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -65,26 +66,21 @@ export default function ShopToolbar({
 
         {/* Mobile Dropdown */}
         {menuOpen && (
-          <div className="absolute top-16 left-4 right-4 bg-white border rounded-lg shadow-md flex flex-col items-start p-4 space-y-2 md:hidden z-50">
-            <a
-              href="/"
-              className="text-gray-600 hover:text-blue-600 w-full"
-            >
+          <div className="absolute top-14 left-3 right-3 bg-white border rounded-lg shadow-md flex flex-col items-start p-4 space-y-2 md:hidden z-50">
+            <a className="text-gray-600 hover:text-blue-600 w-full" href="/">
               Home
             </a>
-            <a
-              href="/shop"
-              className="text-blue-600 font-semibold border-b-2 border-blue-600 w-full"
-            >
+            <a className="text-blue-600 font-semibold border-b-2 border-blue-600 w-full" href="/shop">
               Shop
             </a>
           </div>
         )}
       </div>
 
-      {/* Right side: Show count + View toggle + Sorting */}
-      <div className="flex items-center gap-6 mt-3 md:mt-0">
-        {/* Show count selector */}
+      {/* Right side: controls */}
+      <div className="flex flex-wrap sm:flex-nowrap items-center gap-4 justify-end w-full sm:w-auto">
+
+        {/* Show Count Selector */}
         <div className="flex items-center gap-2 text-sm font-medium text-gray-600">
           <span className="text-gray-700">Show:</span>
           <ToggleGroup
@@ -108,7 +104,7 @@ export default function ShopToolbar({
           </ToggleGroup>
         </div>
 
-        {/* View toggle */}
+        {/* Grid View Toggle */}
         <ToggleGroup
           type="single"
           value={view}
@@ -125,6 +121,7 @@ export default function ShopToolbar({
           >
             <List className="h-4 w-4" />
           </ToggleGroupItem>
+
           <ToggleGroupItem
             value="grid-2"
             aria-label="2-column grid"
@@ -132,6 +129,7 @@ export default function ShopToolbar({
           >
             <Grid2x2 className="h-4 w-4" />
           </ToggleGroupItem>
+
           <ToggleGroupItem
             value="grid-3"
             aria-label="3-column grid"
@@ -139,6 +137,7 @@ export default function ShopToolbar({
           >
             <Grid3x3 className="h-4 w-4" />
           </ToggleGroupItem>
+
           <ToggleGroupItem
             value="grid-4"
             aria-label="4-column grid"
@@ -148,22 +147,19 @@ export default function ShopToolbar({
           </ToggleGroupItem>
         </ToggleGroup>
 
-        {/* Sorting dropdown */}
+        {/* Sorting Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="outline"
               size="sm"
-              className="rounded-md border-gray-300 bg-white hover:bg-gray-50 transition flex items-center gap-2"
+              className="rounded-md border-gray-300 bg-white hover:bg-gray-50 flex items-center gap-2"
             >
               <span className="text-gray-700">{sort}</span>
               <ChevronDown className="h-4 w-4 text-gray-500" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="w-56 shadow-lg rounded-lg"
-          >
+          <DropdownMenuContent align="end" className="w-56 shadow-lg rounded-lg">
             {[
               "Default sorting",
               "Sort by popularity",

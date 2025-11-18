@@ -22,9 +22,15 @@ export default function ShopToolbarFilter() {
   const visibleProducts = products.slice(startIndex, endIndex);
 
   return (
-    <div className="grid grid-cols-12 gap-6 p-6">
-      <SidebarFilters />
-      <main className="col-span-9">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-4 sm:p-6">
+      
+      {/* Sidebar — hidden on mobile */}
+      <div className="hidden lg:block col-span-3">
+        <SidebarFilters />
+      </div>
+
+      {/* Main content */}
+      <main className="col-span-1 lg:col-span-9">
         <ShopToolbar
           perPage={perPage}
           setPerPage={(val) => {
@@ -36,8 +42,9 @@ export default function ShopToolbarFilter() {
           view={view}
           setView={setView}
         />
-        {/* Pass only the visible products to the grid */}
+
         <ShopProductGrid products={visibleProducts} view={view} />
+
         <Pagination
           currentPage={page}
           totalPages={totalPages}
