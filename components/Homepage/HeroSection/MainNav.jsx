@@ -43,8 +43,8 @@ export default function MainNav() {
 
         {/* CENTER NAV (Desktop) */}
         <div className="hidden md:flex flex-1 justify-center gap-8 font-semibold text-base lg:text-lg uppercase tracking-wide">
-          <Link href="#" className="hover:text-blue-500 transition">Home</Link>
-          <Link href="#" className="hover:text-blue-500 transition">Shop</Link>
+          <Link href="/" className="hover:text-blue-500 transition">Home</Link>
+          <Link href="/shop" className="hover:text-blue-500 transition">Shop</Link>
           <Link href="#" className="hover:text-blue-500 transition">Blog</Link>
           <Link href="#" className="hover:text-blue-500 transition">Buy</Link>
         </div>
