@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Image from "next/image";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 
 export default function OrderSuccess() {
@@ -10,7 +11,7 @@ export default function OrderSuccess() {
   const router = useRouter();
   const orderId = params.orderId;
 
-  const paid = searchParams.get("paid");
+  const sessionId = searchParams.get("session_id");
 
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,28 +37,28 @@ export default function OrderSuccess() {
     fetchOrder();
   }, [orderId]);
 
-  // Mark order as paid if redirected from Stripe
+  // Verify payment with Stripe (via our backend) if redirected from checkout
   useEffect(() => {
     const markOrderPaid = async () => {
-      if (!paid) return;
+      if (!sessionId) return;
 
       try {
         setLoading(true);
-        const res = await axios.post("/api/mark-order-paid", { orderId });
+        const res = await axios.post("/api/mark-order-paid", { orderId, sessionId });
         if (res.data.success) {
           setMessage("✅ Payment successful! Your order is now marked as paid.");
-          setOrder(prev => ({ ...prev, status: "paid" }));
+          setOrder(prev => (prev ? { ...prev, status: "paid" } : prev));
         } else {
-          setMessage(`❌ ${res.data.error || "Failed to mark order paid."}`);
+          setMessage(`❌ ${res.data.error || "Failed to verify payment."}`);
         }
       } catch (err) {
-        setMessage(`❌ ${err.message}`);
+        setMessage(`❌ ${err.response?.data?.error || err.message}`);
       } finally {
         setLoading(false);
       }
     };
     markOrderPaid();
-  }, [orderId, paid]);
+  }, [orderId, sessionId]);
 
   if (loading) return <div className="text-center py-20">Loading your order...</div>;
 
@@ -81,7 +82,13 @@ export default function OrderSuccess() {
           {cart.map((item, idx) => (
             <div key={idx} className="flex items-center justify-between border-b pb-4">
               <div className="flex items-center gap-4">
-                <img src={item.img || "/placeholder.png"} alt={item.title} className="w-16 h-16 object-cover rounded" />
+                <Image
+                  src={item.img || "/placeholder.png"}
+                  alt={item.title}
+                  width={64}
+                  height={64}
+                  className="w-16 h-16 object-cover rounded"
+                />
                 <div>
                   <h3 className="font-medium">{item.title}</h3>
                   <p className="text-gray-500 text-sm">Qty: {item.quantity}</p>

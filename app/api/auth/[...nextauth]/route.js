@@ -4,7 +4,6 @@ import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import clientPromise from "@/lib/mongodb"
-import { MongoClient } from "mongodb"
 import bcrypt from "bcryptjs"
 
 export const authOptions = {
@@ -19,7 +18,9 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const client = await MongoClient.connect(process.env.MONGODB_URI)
+        // Reuse the shared, cached connection instead of opening a brand
+        // new MongoDB connection on every single login attempt.
+        const client = await clientPromise
         const db = client.db("world_mart") 
         const user = await db.collection("users").findOne({ email: credentials.email })
 

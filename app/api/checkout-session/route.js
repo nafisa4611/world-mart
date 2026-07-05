@@ -28,8 +28,9 @@ export async function POST(req) {
         quantity: item.quantity,
       })),
       mode: "payment",
-      // Pass orderId in query so we can mark as paid
-      success_url: `${process.env.NEXTAUTH_URL}/order-success/${order._id}?paid=true`,
+      // Pass Stripe's own session_id back so we can verify the payment
+      // actually succeeded before marking the order as paid.
+      success_url: `${process.env.NEXTAUTH_URL}/order-success/${order._id}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXTAUTH_URL}/checkout`,
       metadata: { orderId: order._id.toString() },
     });

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 
@@ -12,7 +12,12 @@ export function AppProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [discount, setDiscount] = useState(0);
   const [freeShippingGoal] = useState(200);
-  
+
+  // Tracks whether the saved cart has finished loading for the current
+  // session, so we don't accidentally overwrite it with an empty cart
+  // before it has arrived (see saveCart effect below).
+  const cartLoadedRef = useRef(false);
+  const loadedForEmailRef = useRef(null);
 
   // Sync user with session
   useEffect(() => {
@@ -22,16 +27,30 @@ export function AppProvider({ children }) {
 
   // Load cart from MongoDB when user logs in
   useEffect(() => {
-    const loadCart = async () => {
-      if (!session?.user?.email) return;
+    const email = session?.user?.email;
 
+    if (!email) {
+      // Logged out: reset so a future login loads fresh instead of
+      // reusing a stale "loaded" flag from a previous user.
+      cartLoadedRef.current = false;
+      loadedForEmailRef.current = null;
+      return;
+    }
+
+    const loadCart = async () => {
+      cartLoadedRef.current = false;
       try {
-        const res = await axios.get(`/api/cart?userEmail=${session.user.email}`);
+        const res = await axios.get(`/api/cart?userEmail=${email}`);
         if (res.data?.cartItems) {
           setCart(res.data.cartItems);
         }
       } catch (err) {
         console.error("Failed to load cart", err);
+      } finally {
+        // Mark loading complete only after the request settles, so the
+        // save effect below knows it's now safe to persist changes.
+        loadedForEmailRef.current = email;
+        cartLoadedRef.current = true;
       }
     };
 
@@ -40,15 +59,20 @@ export function AppProvider({ children }) {
 
   // Save cart to MongoDB whenever cart changes
   useEffect(() => {
-    const saveCart = async () => {
-      if (!session?.user?.email) return;
+    const email = session?.user?.email;
+    if (!email) return;
 
+    // Don't save until the initial cart for this user has finished
+    // loading — otherwise the empty starting cart gets written to the
+    // database first and wipes out whatever was saved previously.
+    if (!cartLoadedRef.current || loadedForEmailRef.current !== email) return;
+
+    const saveCart = async () => {
       try {
         await axios.post("/api/cart", {
-          userEmail: session.user.email,
+          userEmail: email,
           cartItems: cart,
         });
-        console.log("Cart saved successfully");
       } catch (err) {
         console.error("Failed to save cart", err);
       }
@@ -130,7 +154,6 @@ const placeOrder = async (orderData) => {
     })
 
     if (res.data?.success) {
-      console.log("Order placed:", res.data)
       setCart([])
       setDiscount(0)
     }
