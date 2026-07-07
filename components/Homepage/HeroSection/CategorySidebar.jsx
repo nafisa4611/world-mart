@@ -32,7 +32,7 @@ export default function CategorySidebar() {
   const [hovered, setHovered] = useState(null)
 
   return (
-    <div className="hidden md:block w-72 bg-white border-r shadow-sm relative">
+    <div className="hidden md:flex md:flex-col h-full w-72 bg-white border-r shadow-sm relative">
       <ul className="divide-y divide-gray-100">
         {categories.map(({ name, icon: Icon, sub }) => (
           <li

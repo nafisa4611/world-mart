@@ -5,9 +5,9 @@ import HeroBanner from "./HeroBanner"
 
 export default function HeroSection() {
   return (
-    <div className="flex flex-col md:flex-row w-full">
+    <div className="flex flex-col md:flex-row md:items-stretch w-full">
       {/* Sidebar */}
-      <div className="w-full md:w-72 mb-4 md:mb-0">
+      <div className="w-full md:w-72 md:h-auto mb-4 md:mb-0">
         <CategorySidebar />
       </div>
 
