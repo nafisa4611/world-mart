@@ -138,7 +138,7 @@ export default function OrderSuccess() {
           Continue Shopping
         </button>
         <button
-          onClick={() => router.push("/shop/orders")}
+          onClick={() => router.push("/my-dashboard")}
           className="bg-gray-200 text-gray-800 py-3 px-6 rounded hover:bg-gray-300 transition"
         >
           View My Orders

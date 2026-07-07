@@ -43,9 +43,7 @@ export default function Header() {
 
             <div className="h-6 border-l border-white" />
 
-            <a href="#" className="hover:text-blue-300">NEWSLETTER</a>
-            <a href="#" className="hover:text-blue-300">CONTACT US</a>
-            <a href="#" className="hover:text-blue-300">FAQS</a>
+            <a href="/contact-us" className="hover:text-blue-300">CONTACT US</a>
           </div>
 
           {/* Hamburger stays same */}
@@ -75,9 +73,7 @@ export default function Header() {
               </select>
             </div>
 
-            <Link href="#" className="px-4 py-3 hover:bg-blue-800 transition">NEWSLETTER</Link>
-            <Link href="#" className="px-4 py-3 hover:bg-blue-800 transition">CONTACT US</Link>
-            <Link href="#" className="px-4 py-3 hover:bg-blue-800 transition">FAQS</Link>
+            <Link href="/contact-us" className="px-4 py-3 hover:bg-blue-800 transition">CONTACT US</Link>
 
             <div className="flex items-center justify-center gap-4 py-3">
               <Facebook className="w-5 h-5 cursor-pointer" />

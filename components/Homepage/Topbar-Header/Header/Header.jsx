@@ -62,7 +62,9 @@ export default function Header() {
 
           {user ? (
             <div className="hidden md:flex items-center gap-4">
-              <span className="font-semibold text-primary">Hello, {user.name}</span>
+              <Link href="/my-dashboard" className="font-semibold text-primary hover:text-blue-600 transition">
+                Hello, {user.name}
+              </Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
                 className="flex items-center gap-1 text-red-600 hover:text-red-800 text-sm font-medium transition"
@@ -76,7 +78,10 @@ export default function Header() {
             </Link>
           )}
 
-          <Heart className="w-5 h-5 cursor-pointer hover:text-red-500 transition" />
+          <Heart
+            className="w-5 h-5 text-gray-300 cursor-not-allowed"
+            title="Wishlist (coming soon)"
+          />
           <Link href="/checkout">
             <Repeat className="w-5 h-5 cursor-pointer hover:text-green-500 transition" />
           </Link>
@@ -133,9 +138,11 @@ export default function Header() {
                 Login / Register
               </Link>
             )}
-            <Link href="#" className="py-2 hover:text-blue-500">Wishlist</Link>
-            <Link href="/checkout" className="py-2 hover:text-green-500">Orders</Link>
-            <Link href="#" className="py-2 hover:text-primary">Cart</Link>
+            <Link href="#" className="py-2 text-gray-400 cursor-not-allowed" onClick={(e) => e.preventDefault()}>
+              Wishlist <span className="text-xs">(coming soon)</span>
+            </Link>
+            <Link href="/my-dashboard" className="py-2 hover:text-green-500">Orders</Link>
+            <Link href="/cart" className="py-2 hover:text-primary">Cart</Link>
           </div>
         </div>
       )}
